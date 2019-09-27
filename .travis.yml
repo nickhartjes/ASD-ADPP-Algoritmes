@@ -14,4 +14,8 @@ cache:
 
 script:
   - ./mvnw clean test install
+  - ./mvnw cobertura:cobertura
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
