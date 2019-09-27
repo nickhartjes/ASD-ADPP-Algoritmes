@@ -2,7 +2,8 @@
 
 # Opdrachten PO_Algoritmes
 
-[![Build Status](https://travis-ci.com/nickhartjes/ASD-ADPP.svg?token=o31qJmVgceouJCVa8sSz&branch=master)](https://travis-ci.com/nickhartjes/ASD-ADPP)
+[![Build Status](https://travis-ci.com/nickhartjes/ASD-ADPP.svg?token=o31qJmVgceouJCVa8sSz&branch=master)](https://travis-ci.com/nickhartjes/ASD-ADPP)   
+[![codecov](https://codecov.io/gh/nickhartjes/ASD-ADPP/branch/master/graph/badge.svg?token=K06sZUhOmk)](https://codecov.io/gh/nickhartjes/ASD-ADPP)
 
 ## Opdracht 1      
 Programmeer Quicksort uit zoals in de opgave van Sorteeralgoritmes, maar deze keer generic voor klassen die de Comparable<T> interface implementeren
