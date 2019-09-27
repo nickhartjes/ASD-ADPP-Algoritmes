@@ -21,6 +21,7 @@
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
         <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <lombok.version>1.18.10</lombok.version>
     </properties>
 
     <licenses>
@@ -94,6 +95,7 @@
                     <source>${maven.compiler.target}</source>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

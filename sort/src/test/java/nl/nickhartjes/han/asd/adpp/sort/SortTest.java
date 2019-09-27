@@ -1,6 +1,5 @@
-package java.nl.hartjes.han.asd.adpp.sorting;
+package nl.nickhartjes.han.asd.adpp.sort;
 
-import nl.nickhartjes.han.asd.adpp.sort.Sort;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
@@ -47,5 +46,6 @@ abstract class SortTest {
         int[] sortedArray = instance.sort(sortArray);
         assertEquals(min, sortedArray[0]);
         assertEquals(max, sortedArray[sortArray.length - 1]);
+        assertEquals(sortArray.length, sortedArray.length);
     }
 }

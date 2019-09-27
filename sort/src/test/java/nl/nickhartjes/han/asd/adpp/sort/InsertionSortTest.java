@@ -1,6 +1,5 @@
-package java.nl.hartjes.han.asd.adpp.sorting;
+package nl.nickhartjes.han.asd.adpp.sort;
 
-import nl.nickhartjes.han.asd.adpp.sort.InsertionSort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +37,20 @@ class InsertionSortTest extends SortTest {
     }
 
     @Test
-    void sortSortedArray_Test() {
+    void sortAlreadySortedArray_Test() {
         int[] sortArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        super.checkOrderofArrayAfterSort(this.instance, sortArray);
+    }
+
+    @Test
+    void sortNegativeArray_Test() {
+        int[] sortArray = {-1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
+        super.checkOrderofArrayAfterSort(this.instance, sortArray);
+    }
+
+    @Test
+    void sortArrayWithMaxAndMinIntValue_Test() {
+        int[] sortArray = {2147483647, 2, 3, 4, 5, 6, -2147483647};
         super.checkOrderofArrayAfterSort(this.instance, sortArray);
     }
 }
