@@ -13,7 +13,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./mvnw clean test package
+  - ./mvnw clean test jacoco:report package
   - ./mvnw cobertura:cobertura
 
 after_success:

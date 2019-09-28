@@ -3,13 +3,13 @@ package nl.nickhartjes.han.asd.adpp.sort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class InsertionSortTest extends SortTest {
+class MergeSortTest extends SortTest {
 
-    private InsertionSort instance;
+    private MergeSort instance;
 
     @BeforeEach
     void initTest() {
-        this.instance = new InsertionSort();
+        this.instance = new MergeSort();
     }
 
     @Test

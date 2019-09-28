@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Util {
     private Util() {
-        // Disable constructor
+        throw new UnsupportedOperationException();
     }
 
     public static void printArray(int[] array) {
