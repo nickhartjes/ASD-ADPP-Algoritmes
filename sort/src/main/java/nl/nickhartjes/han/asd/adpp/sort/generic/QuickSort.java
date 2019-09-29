@@ -1,6 +1,6 @@
 package nl.nickhartjes.han.asd.adpp.sort.generic;
 
-public class QuickSort<T extends Comparable> {
+public class QuickSort<T extends Comparable<? super T>> {
 
     private T[] array;
 
@@ -59,12 +59,9 @@ public class QuickSort<T extends Comparable> {
             }
         }
         // call quickSort() method recursively
-        if (leftIndex < j) {
-            quickSort(leftIndex, j, medianOfThree);
-        }
-        if (i < rightIndex) {
-            quickSort(i, rightIndex, medianOfThree);
-        }
+        if (leftIndex < j) quickSort(leftIndex, j, medianOfThree);
+
+        if (i < rightIndex) quickSort(i, rightIndex, medianOfThree);
     }
 
     private void exchangeNumbers(int i, int j) {
@@ -74,22 +71,12 @@ public class QuickSort<T extends Comparable> {
     }
 
     private T middleOfThree(T a, T b, T c) {
-
-
-        if (a.compareTo(b) < 0) {
+        if ((a.compareTo(b) < 0 && b.compareTo(c) < 0) || (c.compareTo(b) < 0 && b.compareTo(a) < 0)) {
             return b;
+        } else if ((b.compareTo(a) < 0 && a.compareTo(c) < 0) || (c.compareTo(a) < 0 && a.compareTo(b) < 0)) {
+            return a;
+        } else {
+            return c;
         }
-//        // Checking for b
-//        if ((a < b && b < c) || (c < b && b < a)) {
-//            return b;
-//        }
-//
-//        // Checking for a
-//        else if ((b < a && a < c) || (c < a && a < b)) {
-//            return a;
-//        } else {
-//            return c;
-//        }
     }
-
 }
