@@ -36,7 +36,6 @@ public class Graph<T> {
         if (weighted == GraphWeight.WEIGHTED) {
             throw new IllegalArgumentException("You need to add weight to the Edge");
         }
-
         this.addEdge(sourceVertex, destinationVertex, null);
     }
 
