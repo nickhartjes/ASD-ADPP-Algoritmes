@@ -35,10 +35,10 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
 
         @Override
         public boolean equals(Object obj) {
-            if(this == obj)
+            if (this == obj)
                 return true;
 
-            if(obj == null || obj.getClass()!= this.getClass())
+            if (obj == null || obj.getClass() != this.getClass())
                 return false;
 
             // type casting of the argument.
@@ -49,26 +49,50 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
         }
     }
 
-    private PriorityQueue queue = new PriorityQueue<Edge>();
-    private Map distanceMap = new HashMap<T, Edge>();
+    private PriorityQueue<Edge<T>> queue = new PriorityQueue<>();
+    private Map<T, PriorityQueueElement<? extends T>> distanceMap = new HashMap<>();
+    private Map<T, LinkedList<Edge>> graph = new HashMap<>();
 
     @Override
     public void searchShortestPath(Map<T, LinkedList<Edge>> graph, T sourceVertex, T destinationVertex) {
+        this.graph = graph;
 
-//        // Add all vertexes to the distance map
-//        for (T vertex: graph.keySet()){
-//            distanceMap.put(vertex, new Edge<>());
-//        }
-//
-//        LinkedList<Edge> edges = graph.get(sourceVertex);
-//        if(edges.size() == 0){
-//            throw new IllegalStateException("Source vertex doesnt have edges");
-//        }
-//        for(Edge edge: edges){
-//
-//        }
+        // Set the first value in the distance table
+        distanceMap.put(sourceVertex, new PriorityQueueElement<>(sourceVertex, 0));
 
-//        this.queue.add(sourceVertex);
 
+        this.addEdgesToQueue(sourceVertex);
+
+
+        while (!queue.isEmpty()) {
+
+            // Get the lowest weight from the priority queue
+            Edge<T> firstEdge = queue.poll();
+            T sourceVertex1 = firstEdge.getSourceVertex();
+            T destinationVertex1 = firstEdge.getDestinationVertex();
+
+
+            PriorityQueueElement<? extends T> test = distanceMap.get(sourceVertex1);
+
+            double newWeight = test.getWeight() + firstEdge.getWeight();
+
+            PriorityQueueElement<T> elke = new PriorityQueueElement<>(sourceVertex1, newWeight);
+            distanceMap.put(destinationVertex1, elke);
+
+            this.addEdgesToQueue(firstEdge.getDestinationVertex());
+
+            System.out.println("test");
+        }
+
+        System.out.println("test");
+    }
+
+    private void addEdgesToQueue(T vertex){
+        LinkedList<Edge> edgesFromVertex = this.graph.get(vertex);
+//        if (edgesFromSourceVortex.isEmpty()) throw new IllegalStateException("Source vertex doesnt have edges");
+//        this.queue.addAll(edgesFromVertex);
+        for (Edge edge: edgesFromVertex){
+            this.queue.add(edge);
+        }
     }
 }

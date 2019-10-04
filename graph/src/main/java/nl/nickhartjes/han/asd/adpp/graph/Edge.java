@@ -2,7 +2,7 @@ package nl.nickhartjes.han.asd.adpp.graph;
 
 import java.util.Comparator;
 
-public class Edge<T> implements Comparator<Edge> {
+public class Edge<T> implements Comparable<Edge> {
 
     private T sourceVertex;
     private T destinationVertex;
@@ -56,14 +56,16 @@ public class Edge<T> implements Comparator<Edge> {
     }
 
 
-    @Override
-    public int compare(Edge edge1, Edge edge2) {
-        if (edge1.getWeight() < edge2.getWeight())
-            return -1;
-        if (edge1.getWeight() > edge2.getWeight())
-            return 1;
-        return 0;
-    }
+//    @Override
+//    public int compare(Edge edge1, Edge edge2) {
+//        if (edge1.getWeight() < edge2.getWeight())
+//            return -1;
+//        if (edge1.getWeight() > edge2.getWeight())
+//            return 1;
+//        return 0;
+//    }
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -79,5 +81,14 @@ public class Edge<T> implements Comparator<Edge> {
                 && this.getDestinationVertex() == edge.getDestinationVertex()
                 && this.getWeight() == edge.getWeight()
         );
+    }
+
+    @Override
+    public int compareTo(Edge o) {
+        if (this.getWeight() < o.getWeight())
+            return -1;
+        if (this.getWeight() > o.getWeight())
+            return 1;
+        return 0;
     }
 }

@@ -1,7 +1,6 @@
 ![HAN](https://upload.wikimedia.org/wikipedia/commons/e/eb/HAN-merkteken-descriptor.png)
 
 # Opdrachten PO_Algoritmes
-
 [![Build Status](https://travis-ci.com/nickhartjes/ASD-ADPP.svg?token=o31qJmVgceouJCVa8sSz&branch=master)](https://travis-ci.com/nickhartjes/ASD-ADPP)   
 [![codecov](https://codecov.io/gh/nickhartjes/ASD-ADPP/branch/master/graph/badge.svg?token=K06sZUhOmk)](https://codecov.io/gh/nickhartjes/ASD-ADPP)
 
@@ -18,3 +17,6 @@ a.	Implementeer de operatie insert.
 b.	Implementeer recursief de operaties find, findMin en findMax.   
 c.  (bonus) Implementeer de operatie remove(int x). Hint: bestudeer de implementaties in het boek.
 
+
+## Preconditions
+- Java SDK 11 and up
