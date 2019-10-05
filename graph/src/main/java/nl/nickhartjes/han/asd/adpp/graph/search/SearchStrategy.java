@@ -6,5 +6,5 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public interface SearchStrategy<T> {
-    void searchShortestPath(Map<T, LinkedList<Edge>> graph, T sourceVertex, T destinationVertex);
+    void searchShortestPath(Map<T, LinkedList<Edge<T>>> graph, T sourceVertex, T destinationVertex);
 }
