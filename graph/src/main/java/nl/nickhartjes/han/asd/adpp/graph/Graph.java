@@ -4,8 +4,6 @@ import nl.nickhartjes.han.asd.adpp.graph.search.DijkstraStrategy;
 import nl.nickhartjes.han.asd.adpp.graph.search.SearchStrategy;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class Graph<T> {
 
@@ -14,7 +12,8 @@ public class Graph<T> {
     private GraphDirection graphDirection;
     private SearchStrategy searchStrategy;
 
-    private Map<T, LinkedList<Edge>> adjacencyList = new HashMap<>();
+
+    private HashMap<T, GraphVertex<T>> adjacencyList = new HashMap<>();
 
     public Graph(String name) {
         this(name, GraphDirection.UNDIRECTED, GraphWeight.UNWEIGHTED);
@@ -27,65 +26,71 @@ public class Graph<T> {
         this.searchStrategy = new DijkstraStrategy<T>();
     }
 
-    public void addVertex(T vertex) {
-        LinkedList<Edge> vertexList = new LinkedList<>();
-        adjacencyList.put(vertex, vertexList);
+    public void addVertex(T... vertexes) {
+        for (T vertex : vertexes) {
+            this.adjacencyList.put(vertex, new GraphVertex<T>(vertex));
+        }
     }
 
     public void addEdge(T sourceVertex, T destinationVertex) {
         if (weighted == GraphWeight.WEIGHTED)
             throw new IllegalArgumentException("You need to add weight to the Edge");
-
-        this.addEdge(sourceVertex, destinationVertex, null);
+        this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, 1d);
     }
 
     public void addEdge(T sourceVertex, T destinationVertex, Double weight) {
-        if (weighted == GraphWeight.UNWEIGHTED && weight != null) {
+        if (this.weighted == GraphWeight.UNWEIGHTED)
             throw new IllegalArgumentException("You can't add weight to an unweigthed graph");
-        }
-        if (!adjacencyList.containsKey(sourceVertex))
+        this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, weight);
+    }
+
+    private void addEdgeToAdjecencylist(T sourceVertex, T destinationVertex, Double weight) {
+        if (!this.adjacencyList.containsKey(sourceVertex))
             throw new IllegalArgumentException("The source vertex doesnt exist in this graph");
 
-        if (!adjacencyList.containsKey(destinationVertex))
+        if (!this.adjacencyList.containsKey(destinationVertex))
             throw new IllegalArgumentException("The destination vertex doesnt exist in this graph");
 
         if (sourceVertex.equals(destinationVertex))
             throw new IllegalArgumentException("A Vertex can't connect to itself");
 
-        // If unweigted set all to 1
-        if (weighted == GraphWeight.UNWEIGHTED)
-            weight = 1d;
-
-        LinkedList<Edge> sourceEdges = adjacencyList.get(sourceVertex);
-        sourceEdges.add(new Edge<T>(sourceVertex, destinationVertex, weight));
-        adjacencyList.replace(sourceVertex, sourceEdges);
+        GraphVertex sourceGraphVertex = this.adjacencyList.get(sourceVertex);
+        GraphVertex destinationGraphVertex = this.adjacencyList.get(destinationVertex);
+        GraphEdge edge = new GraphEdge(sourceGraphVertex, destinationGraphVertex, weight);
+        sourceGraphVertex.setEdge(edge);
 
         if (graphDirection == GraphDirection.UNDIRECTED) {
-            LinkedList<Edge> destinationEdges = adjacencyList.get(destinationVertex);
-            destinationEdges.add(new Edge<T>(destinationVertex, sourceVertex, weight));
-            adjacencyList.replace(destinationVertex, destinationEdges);
+            GraphEdge redirectEdge = new GraphEdge(destinationGraphVertex, sourceGraphVertex, weight);
+            destinationGraphVertex.setEdge(redirectEdge);
         }
     }
 
     public void searchShortestPath(T sourceVertex, T destinationVertex) {
         this.searchStrategy.searchShortestPath(adjacencyList, sourceVertex, destinationVertex);
+        this.resetVertexVisited();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append("Graph ").append(name).append(" {").append("\n");
-
-        adjacencyList.forEach((k, v) -> {
-            str.append("    ");
-            str.append(k.toString()).append(" : ");
-            for (Edge edge : v) {
-                str.append(" -> ");
-                str.append(edge.toString());
-            }
-            str.append("\n");
-        });
-        str.append("}");
-        return str.toString();
+    public void resetVertexVisited() {
+        for (T key : this.adjacencyList.keySet()) {
+            this.adjacencyList.get(key).unsetVisit();
+        }
     }
+
+//    @Override
+//    public String toString() {
+//        StringBuilder str = new StringBuilder();
+//        str.append("Graph ").append(name).append(" {").append("\n");
+//
+//        adjacencyList.forEach((k, v) -> {
+//            str.append("    ");
+//            str.append(k.toString()).append(" : ");
+//            for (Edge edge : v) {
+//                str.append(" -> ");
+//                str.append(edge.toString());
+//            }
+//            str.append("\n");
+//        });
+//        str.append("}");
+//        return str.toString();
+//    }
 }

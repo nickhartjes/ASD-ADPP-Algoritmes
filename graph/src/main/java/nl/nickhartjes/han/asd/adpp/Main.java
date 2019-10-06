@@ -46,8 +46,11 @@ class Main {
         route03.addEdge("a", "b", 8.1);
         route03.addEdge("c", "b", 3.4);
         route03.addEdge("a", "c", 6.1);
-
+        route03.addEdge("c", "d", 6.1);
+        route03.addEdge("d", "e", 6.1);
+//
         route03.searchShortestPath("a", "c");
+        route03.searchShortestPath("a", "e");
         System.out.println(route03.toString());
     }
 }
