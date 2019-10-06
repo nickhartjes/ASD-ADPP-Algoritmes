@@ -12,7 +12,7 @@ public class GraphEdge<T> implements Comparable<GraphEdge> {
         this.weight = weight;
     }
 
-    public GraphVertex getSource() {
+    public GraphVertex<T> getSource() {
         return source;
     }
 

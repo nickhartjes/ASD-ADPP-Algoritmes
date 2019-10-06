@@ -12,7 +12,6 @@ public class Graph<T> {
     private GraphDirection graphDirection;
     private SearchStrategy searchStrategy;
 
-
     private HashMap<T, GraphVertex<T>> adjacencyList = new HashMap<>();
 
     public Graph(String name) {
@@ -26,7 +25,8 @@ public class Graph<T> {
         this.searchStrategy = new DijkstraStrategy<T>();
     }
 
-    public void addVertex(T... vertexes) {
+    @SafeVarargs
+    public final void addVertex(T... vertexes) {
         for (T vertex : vertexes) {
             this.adjacencyList.put(vertex, new GraphVertex<T>(vertex));
         }
@@ -44,6 +44,18 @@ public class Graph<T> {
         this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, weight);
     }
 
+    public HashMap<T, GraphVertex<T>> getAdjacencyList() {
+        return adjacencyList;
+    }
+
+    public GraphWeight getWeighted() {
+        return weighted;
+    }
+
+    public GraphDirection getGraphDirection() {
+        return graphDirection;
+    }
+
     private void addEdgeToAdjecencylist(T sourceVertex, T destinationVertex, Double weight) {
         if (!this.adjacencyList.containsKey(sourceVertex))
             throw new IllegalArgumentException("The source vertex doesnt exist in this graph");
@@ -54,43 +66,19 @@ public class Graph<T> {
         if (sourceVertex.equals(destinationVertex))
             throw new IllegalArgumentException("A Vertex can't connect to itself");
 
-        GraphVertex sourceGraphVertex = this.adjacencyList.get(sourceVertex);
-        GraphVertex destinationGraphVertex = this.adjacencyList.get(destinationVertex);
-        GraphEdge edge = new GraphEdge(sourceGraphVertex, destinationGraphVertex, weight);
+        GraphVertex<T> sourceGraphVertex = this.adjacencyList.get(sourceVertex);
+        GraphVertex<T>  destinationGraphVertex = this.adjacencyList.get(destinationVertex);
+        GraphEdge<T> edge = new GraphEdge<>(sourceGraphVertex, destinationGraphVertex, weight);
         sourceGraphVertex.setEdge(edge);
 
         if (graphDirection == GraphDirection.UNDIRECTED) {
-            GraphEdge redirectEdge = new GraphEdge(destinationGraphVertex, sourceGraphVertex, weight);
+            GraphEdge<T> redirectEdge = new GraphEdge<>(destinationGraphVertex, sourceGraphVertex, weight);
             destinationGraphVertex.setEdge(redirectEdge);
         }
     }
 
-    public void searchShortestPath(T sourceVertex, T destinationVertex) {
-        this.searchStrategy.searchShortestPath(adjacencyList, sourceVertex, destinationVertex);
-        this.resetVertexVisited();
+    public GraphPath<T> searchShortestPath(T sourceVertex, T destinationVertex) {
+        return this.searchStrategy.searchShortestPath(this, sourceVertex, destinationVertex);
     }
 
-    public void resetVertexVisited() {
-        for (T key : this.adjacencyList.keySet()) {
-            this.adjacencyList.get(key).unsetVisit();
-        }
-    }
-
-//    @Override
-//    public String toString() {
-//        StringBuilder str = new StringBuilder();
-//        str.append("Graph ").append(name).append(" {").append("\n");
-//
-//        adjacencyList.forEach((k, v) -> {
-//            str.append("    ");
-//            str.append(k.toString()).append(" : ");
-//            for (Edge edge : v) {
-//                str.append(" -> ");
-//                str.append(edge.toString());
-//            }
-//            str.append("\n");
-//        });
-//        str.append("}");
-//        return str.toString();
-//    }
 }

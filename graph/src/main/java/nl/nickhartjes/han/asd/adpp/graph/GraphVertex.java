@@ -23,4 +23,9 @@ public class GraphVertex<T> {
     public void setEdge(GraphEdge<T> edge) {
         this.edges.add(edge);
     }
+
+    @Override
+    public String toString() {
+        return " (" + value + ") ";
+    }
 }

@@ -1,7 +1,5 @@
 package nl.nickhartjes.han.asd.adpp.graph;
 
-import java.util.Comparator;
-
 public class Edge<T> implements Comparable<Edge> {
 
     private T sourceVertex;
@@ -64,7 +62,6 @@ public class Edge<T> implements Comparable<Edge> {
 //            return 1;
 //        return 0;
 //    }
-
 
 
     @Override
