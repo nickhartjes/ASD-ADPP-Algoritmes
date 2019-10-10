@@ -39,12 +39,6 @@
         </developer>
     </developers>
 
-    <modules>
-        <module>sort</module>
-        <module>graph</module>
-        <module>binary-search-tree</module>
-    </modules>
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
@@ -61,6 +55,12 @@
         </dependency>
 
     </dependencies>
+
+    <reporting>
+        <plugins>
+
+        </plugins>
+    </reporting>
 
     <build>
         <plugins>
@@ -91,6 +91,12 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
             </plugin>
 
             <plugin>

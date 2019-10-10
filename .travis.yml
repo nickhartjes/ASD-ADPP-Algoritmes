@@ -13,7 +13,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - mvn clean test package
+  - mvn clean test package jacoco:report
   - mvn jacoco:report-aggregate
 
 after_success:
