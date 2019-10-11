@@ -2,23 +2,28 @@ image: openjdk:11-jre-slim
 
 stages:
     - build
-    - test
+    - run
 
 before_script:
-    - export MAVEN_USER_HOME=`pwd`/.maven
-    - chmod +x mvnw
+    #  - echo `pwd` # debug
+    #  - echo "$CI_BUILD_NAME, $CI_BUILD_REF_NAME $CI_BUILD_STAGE" # debug
+    - export GRADLE_USER_HOME=`pwd`/.gradle
 
-maven-build:
+cache:
+    paths:
+        - .gradle/wrapper
+        - .gradle/caches
+
+build:
     stage: build
-    script: ./mvnw compile -Dmaven.repo.local=$MAVEN_USER_HOME
-
-maven-test:
-    stage: test
     script:
-        - ./mvnw test -Dmaven.repo.local=$MAVEN_USER_HOME
-    artifacts:
-        paths:
-            - target/surefire-reports/*
+        - ./gradlew clean build jacocoTestReport
+        - "cat build/jacocoHtml/index.html"
+
+run:
+    stage: run
+    script:
+        - ./gradlew run
 
 after_script:
     - echo "End CI"

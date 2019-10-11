@@ -1,0 +1,69 @@
+plugins {
+	id 'java'
+	id 'eclipse' // optional (to generate Eclipse project files)
+	id 'idea' // optional (to generate IntelliJ IDEA project files)
+	id 'jacoco'
+	id "application"
+}
+
+group = theGroup
+version = theVersion
+sourceCompatibility = theSourceCompatibility
+
+ext {
+	javaMainClass = "nl.nickhartjes.han.asd.adpp.Main"
+}
+
+application {
+	mainClassName = javaMainClass
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/log4j/log4j
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+	testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+jacoco {
+	toolVersion = "0.8.4"
+	reportsDir = file("$buildDir/jacoco")
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled true
+		html.enabled true
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+//			element = 'CLASS'
+//			limit {
+//				counter = 'LINE'
+//				value = 'COVEREDRATIO'
+//				minimum = 1.0
+//			}
+			excludes = [
+					'nl.nickhartjes.han.asd.adpp.modes.*'
+			]
+		}
+	}
+}

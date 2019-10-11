@@ -13,8 +13,8 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - mvn clean test package jacoco:report
-  - mvn jacoco:report-aggregate
+  - ./gradlew clean build jacocoTestReport
+  - ./gradlew run
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
