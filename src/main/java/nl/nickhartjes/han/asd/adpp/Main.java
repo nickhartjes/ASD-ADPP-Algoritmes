@@ -12,14 +12,16 @@ import nl.nickhartjes.han.asd.adpp.sort.QuickSort;
 import nl.nickhartjes.han.asd.adpp.sort.pivot.MedianOfThreePivot;
 import nl.nickhartjes.han.asd.adpp.sort.pivot.MiddlePivot;
 import nl.nickhartjes.han.asd.adpp.sort.pivot.RandomPivot;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
+import nl.nickhartjes.han.asd.adpp.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Array;
 
 class Main {
-  private static Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
   public static void main(String... args) {
-    DOMConfigurator.configure("src/main/resources/log4j.xml");
     Main main = new Main();
     main.testSort();
     main.testGraph();
@@ -101,29 +103,29 @@ class Main {
     Student[] array04 = {marc, joey, nick};
 
     var runInsertion = new InsertionSort();
-    logger.info(runInsertion.sort(array01));
-    logger.info(runInsertion.sort(array02));
+   Util.printArray( runInsertion.sort(array01));
+   Util.printArray( runInsertion.sort(array02));
 
     var runMerge = new MergeSort();
-    logger.info(runMerge.sort(array01));
-    logger.info(runMerge.sort(array02));
+    Util.printArray( runMerge.sort(array01));
+   Util.printArray( runMerge.sort(array02));
 
     var quickMerge = new QuickSort();
-    logger.info(quickMerge.sort(array01));
-    logger.info(quickMerge.sort(array02));
+   Util.printArray( quickMerge.sort(array01));
+   Util.printArray( quickMerge.sort(array02));
 
-    logger.info(quickMerge.sort(array01, true));
-    logger.info(quickMerge.sort(array02, true));
+   Util.printArray( quickMerge.sort(array01, true));
+   Util.printArray( quickMerge.sort(array02, true));
 
     var quickMergeCharacter = new GenericQuickSort<Character>();
-    logger.info(quickMergeCharacter.sort(array03, new MiddlePivot<>()));
-    logger.info(quickMergeCharacter.sort(array03, new RandomPivot<>()));
-    logger.info(quickMergeCharacter.sort(array03, new MedianOfThreePivot<>()));
+      Util.printArray(quickMergeCharacter.sort(array03, new MiddlePivot<>()));
+      Util.printArray(quickMergeCharacter.sort(array03, new RandomPivot<>()));
+      Util.printArray(quickMergeCharacter.sort(array03, new MedianOfThreePivot<>()));
 
     var quickMergeStudent = new GenericQuickSort<Student>();
-    logger.info(quickMergeStudent.sort(array04, new MiddlePivot<>()));
-    logger.info(quickMergeStudent.sort(array04, new RandomPivot<>()));
-    logger.info(quickMergeStudent.sort(array04, new MedianOfThreePivot<>()));
+      Util.printArray(quickMergeStudent.sort(array04, new MiddlePivot<>()));
+      Util.printArray(quickMergeStudent.sort(array04, new RandomPivot<>()));
+      Util.printArray(quickMergeStudent.sort(array04, new MedianOfThreePivot<>()));
     logger.info("--- End Sort ---");
   }
 
@@ -138,7 +140,7 @@ class Main {
     binarySearchTree01.insert(1);
     binarySearchTree01.insert(3, 2, 4, 2, 77, 3, 213423, 34, 223, 443, -33);
 
-    binarySearchTree01.displayTree();
+//    binarySearchTree01.displayTree();
     Integer node = binarySearchTree01.search(2);
     logger.info(String.valueOf(node));
     Integer node1 = binarySearchTree01.findMax();
