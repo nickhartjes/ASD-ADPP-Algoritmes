@@ -32,7 +32,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void searchNode_Test() {
+    void findNode_Test() {
         this.instance.insert(60, 23, 44, 22, 344, 442, 500);
         assertEquals(344, this.instance.search(344));
     }
@@ -50,17 +50,17 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void emptyFind_ThrowExecption_Test() {
+    void emptyFind_ThrowException_Test() {
         Assertions.assertThrows(IllegalStateException.class, () -> this.instance.search(344));
     }
 
     @Test
-    void emptyFindMax_ThrowExecption_Test() {
+    void emptyFindMax_ThrowException_Test() {
         Assertions.assertThrows(IllegalStateException.class, () -> this.instance.findMax());
     }
 
     @Test
-    void emptyFindMin_ThrowExecption_Test() {
+    void emptyFindMin_ThrowException_Test() {
         Assertions.assertThrows(IllegalStateException.class, () -> this.instance.findMin());
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 abstract class QuickSortTest {
 
-    void emptyArraySort_ThrowExecption_Test(Sort instance) {
+    void emptyArraySort_ThrowException_Test(Sort instance) {
         int[] sortArray = {};
         Assertions.assertThrows(IllegalStateException.class, () -> instance.sort(sortArray));
     }
@@ -28,30 +28,30 @@ abstract class QuickSortTest {
 
     void sortAllReverseOrder_Test(Sort instance) {
         int[] sortArray = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        this.checkOrderofArrayAfterSort(instance, sortArray);
+        this.checkOrderOfArrayAfterSort(instance, sortArray);
     }
 
     void sortAlreadySortedArray_Test(Sort instance) {
         int[] sortArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        this.checkOrderofArrayAfterSort(instance, sortArray);
+        this.checkOrderOfArrayAfterSort(instance, sortArray);
     }
 
     void sortNegativeArray_Test(Sort instance) {
         int[] sortArray = {-1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
-        this.checkOrderofArrayAfterSort(instance, sortArray);
+        this.checkOrderOfArrayAfterSort(instance, sortArray);
     }
 
     void sortArrayWithMaxAndMinIntValue_Test(Sort instance) {
         int[] sortArray = {2147483647, 2, 3, 4, 5, 6, -2147483647};
-        this.checkOrderofArrayAfterSort(instance, sortArray);
+        this.checkOrderOfArrayAfterSort(instance, sortArray);
     }
 
     void sortArrayWithOneValue_Test(Sort instance) {
         int[] sortArray = {2147483647};
-        this.checkOrderofArrayAfterSort(instance, sortArray);
+        this.checkOrderOfArrayAfterSort(instance, sortArray);
     }
 
-    private void checkOrderofArrayAfterSort(Sort instance, int[] sortArray) {
+    private void checkOrderOfArrayAfterSort(Sort instance, int[] sortArray) {
         int min = this.getMinFromArray(sortArray);
         int max = this.getMaxFromArray(sortArray);
         int[] sortedArray = instance.sort(sortArray);

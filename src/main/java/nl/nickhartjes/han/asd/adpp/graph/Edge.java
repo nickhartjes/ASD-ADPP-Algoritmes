@@ -53,17 +53,6 @@ public class Edge<T> implements Comparable<Edge> {
         return stringBuilder.toString();
     }
 
-
-//    @Override
-//    public int compare(Edge edge1, Edge edge2) {
-//        if (edge1.getWeight() < edge2.getWeight())
-//            return -1;
-//        if (edge1.getWeight() > edge2.getWeight())
-//            return 1;
-//        return 0;
-//    }
-
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

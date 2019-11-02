@@ -4,22 +4,21 @@ import nl.nickhartjes.han.asd.adpp.graph.search.DijkstraStrategy;
 import nl.nickhartjes.han.asd.adpp.graph.search.SearchStrategy;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Graph<T> {
 
-    private String name;
     private GraphWeight weighted;
     private GraphDirection graphDirection;
     private SearchStrategy searchStrategy;
 
     private HashMap<T, GraphVertex<T>> adjacencyList = new HashMap<>();
 
-    public Graph(String name) {
-        this(name, GraphDirection.UNDIRECTED, GraphWeight.UNWEIGHTED);
+    public Graph() {
+        this(GraphDirection.UNDIRECTED, GraphWeight.UNWEIGHTED);
     }
 
-    public Graph(String name, GraphDirection graphDirection, GraphWeight graphWeight) {
-        this.name = name;
+    public Graph(GraphDirection graphDirection, GraphWeight graphWeight) {
         this.graphDirection = graphDirection;
         this.weighted = graphWeight;
         this.searchStrategy = new DijkstraStrategy<T>();
@@ -44,7 +43,7 @@ public class Graph<T> {
         this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, weight);
     }
 
-    public HashMap<T, GraphVertex<T>> getAdjacencyList() {
+    public Map<T, GraphVertex<T>> getAdjacencyList() {
         return adjacencyList;
     }
 

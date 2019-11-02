@@ -42,16 +42,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public void displayTree() {
-        this.display(this.root);
+    public String displayTree() {
+        return this.display(this.root);
     }
 
-    public void display(Node<T> node) {
+    public String display(Node<T> node) {
+        StringBuilder sb = new StringBuilder();
         if (node != null) {
-            display(node.getLeft());
-            System.out.print(" " + node.toString());
-            display(node.getRight());
+            sb.append("(");
+            sb.append(display(node.getLeft()));
+            sb.append(" ").append(node.toString());
+            sb.append(display(node.getRight()));
+            sb.append(")");
         }
+        return sb.toString();
     }
 
     public T search(T valueToSearch) {
