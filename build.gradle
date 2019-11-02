@@ -63,7 +63,7 @@ jacocoTestCoverageVerification {
 //				minimum = 1.0
 //			}
 			excludes = [
-					'nl.nickhartjes.han.asd.adpp.modes.*'
+					'nl.nickhartjes.han.asd.adpp.models.*'
 			]
 		}
 	}

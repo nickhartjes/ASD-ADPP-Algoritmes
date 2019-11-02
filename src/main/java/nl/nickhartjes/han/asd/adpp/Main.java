@@ -72,7 +72,7 @@ class Main {
         route01.addEdge('a', 'b');
         route01.addEdge('c', 'b');
         route01.addEdge('a', 'c');
-        logger.info("Route 01: {}", route01);
+        logger.info("Graph 01: {}", route01);
 
         Graph<Character> route02 =
                 new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
@@ -80,7 +80,7 @@ class Main {
         route02.addEdge('a', 'b');
         route02.addEdge('c', 'b');
         route02.addEdge('a', 'c');
-        logger.info("Route 02: {}", route02);
+        logger.info("Graph 02: {}", route02);
 
         Graph<Character> route03 = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         route03.addVertex(this.graphCharacterArray);
@@ -90,8 +90,8 @@ class Main {
         route03.addEdge('c', 'd', 4.5);
         route03.addEdge('d', 'e', 7.4);
         route03.addEdge('e', 'a', 2.2);
-        logger.info("Route 03: {}", route03);
-        logger.info("Route 03: shortestpath {}", route03.searchShortestPath('a', 'e'));
+        logger.info("Graph 03: {}", route03);
+        logger.info("Graph 03: shortestpath {}", route03.searchShortestPath('a', 'e'));
 
         Graph<Character> route04 =
                 new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
@@ -102,7 +102,7 @@ class Main {
         route04.addEdge('c', 'd', 4.5);
         route04.addEdge('d', 'e', 7.4);
         route04.addEdge('e', 'a', 2.2);
-        logger.info("Route 04: shortestpath {}", route04.searchShortestPath('a', 'e'));
+        logger.info("Graph 04: shortestpath {}", route04.searchShortestPath('a', 'e'));
 
         Graph<Character> route05 =
                 new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
@@ -113,7 +113,7 @@ class Main {
         route05.addEdge('c', 'd');
         route05.addEdge('d', 'e');
         route05.addEdge('e', 'a');
-        logger.info("Route 05: shortestpath {}", route05.searchShortestPath('a', 'e'));
+        logger.info("Graph 05: shortestpath {}", route05.searchShortestPath('a', 'e'));
 
         logger.info("--- End Graph ---");
     }

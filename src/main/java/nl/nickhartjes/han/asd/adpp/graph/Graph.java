@@ -51,10 +51,6 @@ public class Graph<T> {
         return weighted;
     }
 
-    public GraphDirection getGraphDirection() {
-        return graphDirection;
-    }
-
     private void addEdgeToAdjecencylist(T sourceVertex, T destinationVertex, Double weight) {
         if (!this.adjacencyList.containsKey(sourceVertex))
             throw new IllegalArgumentException("The source vertex doesnt exist in this graph");
@@ -80,4 +76,27 @@ public class Graph<T> {
         return this.searchStrategy.searchShortestPath(this, sourceVertex, destinationVertex);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
+        stringBuilder.append("Graph {\n");
+        for (Map.Entry<T, GraphVertex<T>> entry : this.getAdjacencyList().entrySet()) {
+            stringBuilder.append("\t");
+            stringBuilder.append(entry.getKey());
+            stringBuilder.append(" -->  ");
+            for (GraphEdge edge : entry.getValue().getEdges()) {
+                stringBuilder.append("(");
+                stringBuilder.append(edge.getDestination());
+                if (this.getWeighted() == GraphWeight.WEIGHTED) {
+                    stringBuilder.append(", ");
+                    stringBuilder.append(edge.getWeight());
+                }
+                stringBuilder.append(") ");
+            }
+            stringBuilder.append("\n");
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
 }

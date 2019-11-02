@@ -13,8 +13,8 @@ class MergeSortTest extends SortTest {
     }
 
     @Test
-    void emptyIntArraySortExeption_Test() {
-        super.emptyIntArraySort_ThrowExecption_Test(this.instance);
+    void emptyIntArraySortException_Test() {
+        super.emptyIntArraySort_ThrowException_Test(this.instance);
     }
 
     @Test

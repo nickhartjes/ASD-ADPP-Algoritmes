@@ -14,7 +14,7 @@ class InsertionSortTest extends SortTest {
 
     @Test
     void emptyIntArraySortExeption_Test() {
-        super.emptyIntArraySort_ThrowExecption_Test(this.instance);
+        super.emptyIntArraySort_ThrowException_Test(this.instance);
     }
 
     @Test

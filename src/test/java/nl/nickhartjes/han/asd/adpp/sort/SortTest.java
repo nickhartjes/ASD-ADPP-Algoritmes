@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 abstract class SortTest {
 
-    void emptyIntArraySort_ThrowExecption_Test(Sort instance) {
+    void emptyIntArraySort_ThrowException_Test(Sort instance) {
         int[] sortArray = {};
         Assertions.assertThrows(IllegalStateException.class, () -> instance.sort(sortArray));
     }

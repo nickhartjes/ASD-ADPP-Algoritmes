@@ -26,6 +26,6 @@ public class GraphVertex<T> {
 
     @Override
     public String toString() {
-        return " (" + value + ") ";
+        return "" + value;
     }
 }

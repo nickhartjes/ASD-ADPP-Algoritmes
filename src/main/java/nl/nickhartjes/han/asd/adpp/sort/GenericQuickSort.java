@@ -14,66 +14,70 @@ import nl.nickhartjes.han.asd.adpp.sort.pivot.SortPivot;
  */
 public class GenericQuickSort<T extends Comparable<? super T>> {
 
-  private T[] array;
+    private T[] array;
 
-  /**
-   * Sorts the array in ascending order of it's elements All elements in the list must implement the
-   * {@link Comparable} interface.
-   *
-   * @param arrayToSort array to sort
-   * @return sorted array of elements
-   */
-  public T[] sort(T[] arrayToSort) {
-    return this.sort(arrayToSort, new MiddlePivot<>());
-  }
-
-  /**
-   * Sorts the array in ascending order of it's elements All elements in the list must implement the
-   * {@link Comparable} interface.
-   *
-   * @param arrayToSort array to sort
-   * @return sorted array of elements
-   */
-  public T[] sort(T[] arrayToSort, SortPivot<T> sortPivot) {
-
-    if (arrayToSort == null || arrayToSort.length < 2) {
-      return arrayToSort;
+    /**
+     * Sorts the array in ascending order of it's elements All elements in the list must implement the
+     * {@link Comparable} interface.
+     *
+     * @param arrayToSort array to sort
+     * @return sorted array of elements
+     */
+    public T[] sort(T[] arrayToSort) {
+        return this.sort(arrayToSort, new MiddlePivot<>());
     }
 
-    this.array = arrayToSort;
-    quickSort(0, arrayToSort.length - 1, sortPivot);
+    /**
+     * Sorts the array in ascending order of it's elements All elements in the list must implement the
+     * {@link Comparable} interface.
+     *
+     * @param arrayToSort array to sort
+     * @return sorted array of elements
+     */
+    public T[] sort(T[] arrayToSort, SortPivot<T> sortPivot) {
 
-    return array;
-  }
+        if (arrayToSort == null || arrayToSort.length == 0) {
+            throw new IllegalStateException("The array is empty");
+        }
 
-  private void quickSort(int leftIndex, int rightIndex, SortPivot<T> sortPivot) {
+        if (arrayToSort.length < 2) {
+            return arrayToSort;
+        }
 
-    T pivot = sortPivot.getPivot(array, leftIndex, rightIndex);
+        this.array = arrayToSort;
+        quickSort(0, arrayToSort.length - 1, sortPivot);
 
-    int leftValue = leftIndex;
-    int rightValue = rightIndex;
-
-    while (leftValue <= rightValue) {
-      while (array[leftValue].compareTo(pivot) < 0) {
-        leftValue++;
-      }
-      while (pivot.compareTo(array[rightValue]) < 0) {
-        rightValue--;
-      }
-      if (leftValue <= rightValue) {
-        exchangeNumbers(leftValue, rightValue);
-        leftValue++;
-        rightValue--;
-      }
+        return array;
     }
 
-    if (leftIndex < rightValue) quickSort(leftIndex, rightValue, sortPivot);
-    if (leftValue < rightIndex) quickSort(leftValue, rightIndex, sortPivot);
-  }
+    private void quickSort(int leftIndex, int rightIndex, SortPivot<T> sortPivot) {
 
-  private void exchangeNumbers(int i, int j) {
-    T temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
+        T pivot = sortPivot.getPivot(array, leftIndex, rightIndex);
+
+        int leftValue = leftIndex;
+        int rightValue = rightIndex;
+
+        while (leftValue <= rightValue) {
+            while (array[leftValue].compareTo(pivot) < 0) {
+                leftValue++;
+            }
+            while (pivot.compareTo(array[rightValue]) < 0) {
+                rightValue--;
+            }
+            if (leftValue <= rightValue) {
+                exchangeNumbers(leftValue, rightValue);
+                leftValue++;
+                rightValue--;
+            }
+        }
+
+        if (leftIndex < rightValue) quickSort(leftIndex, rightValue, sortPivot);
+        if (leftValue < rightIndex) quickSort(leftValue, rightIndex, sortPivot);
+    }
+
+    private void exchangeNumbers(int i, int j) {
+        T temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }

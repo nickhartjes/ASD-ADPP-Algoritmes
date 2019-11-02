@@ -6,7 +6,7 @@ public class QuickSort implements Sort {
 
     @Override
     public int[] sort(int[] arrayToSort) {
-        return this.sort(arrayToSort, false);
+        return this.sort(arrayToSort, true);
     }
 
     public int[] sort(int[] arrayToSort, boolean medianOfThree) {
