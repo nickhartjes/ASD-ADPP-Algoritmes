@@ -93,14 +93,14 @@ class GraphTest {
     }
 
     @Test
-    void addEdge_AddWeigthToAndUnweightedEdge_ThrowException() {
+    void addEdge_AddWeightToAndUnweightedEdge_ThrowException() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
         graph.addVertex(1, 2, 3);
         Assertions.assertThrows(IllegalArgumentException.class, () -> graph.addEdge(1, 2, 2.0));
     }
 
     @Test
-    void addEdge_ForgetWeigthToAndWeightedEdge_ThrowException() {
+    void addEdge_ForgetWeightToAndWeightedEdge_ThrowException() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3);
         Assertions.assertThrows(IllegalArgumentException.class, () -> graph.addEdge(1, 2));
@@ -114,31 +114,77 @@ class GraphTest {
     }
 
     @Test
-    void searchShortestPath_DirectedUnweightedPath_Succesful() {
+    void searchShortestPath_DirectedUnweightedPath_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
-        graph.addVertex(1, 2, 3);
+        graph.addVertex(1, 2, 3, 4, 5, 6, 7);
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
-        graph.addEdge(2, 3);
-        GraphPath<Integer> graphPath = graph.searchShortestPath(1, 3);
-        // 1 --> 2 --> 3
-        assertEquals(3, graphPath.getPath().size());
-        assertEquals(3, graphPath.getWeight());
+        graph.addEdge(3, 7);
+        graph.addEdge(1, 7);
+        GraphPath<Integer> graphPath = graph.searchShortestPath(1, 7);
+        // 1 --> 7
+        logger.info("{}", graph);
+        logger.info("{}", graphPath);
+        assertEquals(2, graphPath.getPath().size());
+        assertEquals(2, graphPath.getWeight());
     }
 
     @Test
-    void searchShortestPath_UnDirectedUnweightedPath_Succesful() {
+    void searchShortestPath_UnDirectedUnweightedPath_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.UNWEIGHTED);
         graph.addVertex(1, 2, 3);
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
         graph.addEdge(2, 3);
-        logger.info("{}", graph);
+
 
         GraphPath<Integer> graphPath = graph.searchShortestPath(1, 3);
-        // 1 --> 2 --> 3
+        // 1 --> 3
+        logger.info("{}", graph);
+        logger.info("{}", graphPath);
+        assertEquals(2, graphPath.getPath().size());
+        assertEquals(2, graphPath.getWeight());
+    }
+
+    @Test
+    void searchShortestPath_DirectedWeightedPath_Successful() {
+        Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
+        graph.addVertex(1, 2, 3, 4, 5, 6, 7);
+        graph.addEdge(1, 2, 20d);
+        graph.addEdge(1, 3, 2d);
+        graph.addEdge(3, 7, 10d);
+        graph.addEdge(1, 7, 30d);
+        GraphPath<Integer> graphPath = graph.searchShortestPath(1, 7);
+        // 1 --> 7
+        logger.info("{}", graph);
+        logger.info("{}", graphPath);
+        assertEquals(3, graphPath.getPath().size());
+        assertEquals(12, graphPath.getWeight());
+    }
+
+    @Test
+    void searchShortestPath_UnDirectedWeightedPath_Successful() {
+        Graph<Integer> graph = new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
+        graph.addVertex(1, 2, 3);
+        graph.addEdge(1, 2, 1d);
+        graph.addEdge(1, 3, 8d);
+        graph.addEdge(2, 3, 2d);
+
+
+        GraphPath<Integer> graphPath = graph.searchShortestPath(1, 3);
+        // 1 --> 3
+        logger.info("{}", graph);
+        logger.info("{}", graphPath);
         assertEquals(3, graphPath.getPath().size());
         assertEquals(3, graphPath.getWeight());
     }
+
+    @Test
+    void searchShortestPath_NoRoute_ThrowException() {
+        Graph<Integer> graph = new Graph<>();
+        graph.addVertex(1, 2, 3);
+        Assertions.assertThrows(IllegalStateException.class, () -> graph.searchShortestPath(1, 7));
+    }
+
 
 }

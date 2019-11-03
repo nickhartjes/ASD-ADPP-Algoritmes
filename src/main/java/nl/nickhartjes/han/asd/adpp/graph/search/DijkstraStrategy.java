@@ -85,7 +85,7 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
 
                 // Check if the distancemap does not contain the vertex already, then add it to the queue
                 // Or if vertex in the distance map has a higher double value, then scan it again
-                if (!distanceMap.containsKey(destinationGraphVertex) || (distanceMap.containsKey(destinationGraphVertex) || distanceMap.get(destinationGraphVertex).getWeight() < newWeight)) {
+                if (!distanceMap.containsKey(destinationGraphVertex) || distanceMap.get(destinationGraphVertex).getWeight() > newWeight) {
                     this.queue.add(new PriorityQueueElement(destinationGraphVertex, newWeight));
                     distanceMap.put(edge.getDestination(), new DistanceMapEntry<T>(edge.getDestination(), edge.getSource(), newWeight));
                 }
