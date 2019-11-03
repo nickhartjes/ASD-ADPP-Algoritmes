@@ -14,6 +14,10 @@ public class Node<T extends Comparable<T>> {
         return value;
     }
 
+    void setValue(T value) {
+        this.value = value;
+    }
+
     Node<T> getLeft() {
         return left;
     }

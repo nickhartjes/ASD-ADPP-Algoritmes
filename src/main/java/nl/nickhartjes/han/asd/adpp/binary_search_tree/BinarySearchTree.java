@@ -68,6 +68,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     /**
      * Search for a Node in subtree with a pre-order traversal algorithm
+     *
      * @param subtreeRoot
      * @param valueToSearch
      * @return
@@ -127,5 +128,43 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 return leftNode;
         }
         return node;
+    }
+
+    public void remove(T valueToRemove) {
+        this.removeRecursive(this.root, valueToRemove);
+    }
+
+    private Node<T> removeRecursive(Node<T> subtreeRoot, T valueToRemove) {
+
+        // Return if empty
+        if (subtreeRoot == null) return subtreeRoot;
+
+        // Recurse down the tree
+        if (valueToRemove.compareTo(subtreeRoot.getValue()) > 0)
+            subtreeRoot.setLeft(this.removeRecursive(subtreeRoot.getLeft(), valueToRemove));
+        else if (valueToRemove.compareTo(subtreeRoot.getValue()) < 0)
+            subtreeRoot.setRight(this.removeRecursive(subtreeRoot.getRight(), valueToRemove));
+
+        else {
+
+            if (subtreeRoot.getLeft() == null)
+                return subtreeRoot.getRight();
+            else if (subtreeRoot.getRight() == null)
+                return subtreeRoot.getLeft();
+
+            subtreeRoot.setValue(getMinimalValue(subtreeRoot.getRight()));
+            subtreeRoot.setRight(removeRecursive(subtreeRoot.getRight(), subtreeRoot.getValue()));
+
+        }
+        return subtreeRoot;
+    }
+
+    private T getMinimalValue(Node<T> root) {
+        T minimalValue = root.getValue();
+        while (root.getLeft() != null) {
+            minimalValue = root.getLeft().getValue();
+            root = root.getLeft();
+        }
+        return minimalValue;
     }
 }

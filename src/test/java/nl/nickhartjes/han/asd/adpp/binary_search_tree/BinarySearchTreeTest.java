@@ -3,10 +3,14 @@ package nl.nickhartjes.han.asd.adpp.binary_search_tree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BinarySearchTreeTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(BinarySearchTreeTest.class);
 
     private BinarySearchTree<Integer> instance;
 
@@ -62,5 +66,21 @@ class BinarySearchTreeTest {
     @Test
     void findMin_EmptyFindMin_ThrowException() {
         Assertions.assertThrows(IllegalStateException.class, () -> this.instance.findMin());
+    }
+
+    @Test
+    void remove_RemoveNode_Successful() {
+        this.instance.insert(60, 23, 44, 22, 344, 442, 500);
+        this.instance.remove(22);
+        logger.info("{}", this.instance);
+        Assertions.assertThrows(IllegalStateException.class, () -> this.instance.search(22));
+    }
+
+    @Test
+    void remove_RemoveRootNode_Successful() {
+        this.instance.insert(60, 23, 44, 22, 344, 442, 500);
+        this.instance.remove(60);
+        logger.info("{}", this.instance);
+        Assertions.assertThrows(IllegalStateException.class, () -> this.instance.search(60));
     }
 }
