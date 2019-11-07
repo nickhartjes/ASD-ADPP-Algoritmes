@@ -1,9 +1,12 @@
 ![HAN](https://upload.wikimedia.org/wikipedia/commons/e/eb/HAN-merkteken-descriptor.png)
 
-# Opdrachten PO_Algoritmes
-Travis ci:   
+##### Travis ci   
+
 [![Build Status](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes.svg?branch=master)](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes)
 [![codecov](https://codecov.io/gh/nickhartjes/ASD-ADPP-Algoritmes/branch/master/graph/badge.svg?token=K06sZUhOmk)](https://codecov.io/gh/nickhartjes/ASD-ADPP-Algoritmes)
+
+# Opdrachten PO_Algoritmes
+
 
 ## Opdracht 1      
 Programmeer Quicksort uit zoals in de opgave van Sorteeralgoritmes, maar deze keer generic voor klassen die de Comparable<T> interface implementeren
@@ -22,8 +25,94 @@ c.  (bonus) Implementeer de operatie remove(int x). Hint: bestudeer de implement
 ## Preconditions
 - Java SDK 11 and up
 
-## Beoordelingsmodel
-| Aspect              | Weging | Criterium                               | Minimum (%) | 100% (lezen van links naar rechts)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 50%                                                                                                                                                                                                           | 0%                                                                                                                         | Beoordeling (%) |
+# Toelichting Opdrachten
+
+## Aspect
+
+### Reproduceerbaarheid
+
+#### Online-compileerbaarheide 
+
+De java sourcecode word door [travis-ci.com](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes) en/of  [travis-ci.org](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes) gebouwd met behulp van een gradle wrapper. Tijdens de bouwpoging worden eerste de externe library's opgehaald, en daarna word de applicatie gebouwd. De volgende stap is het runnen van de testen. Aan de hand van deze testen word er ook een code coverage rapport gegenereerd. Deze is te vinden op [CodeCov](https://codecov.io/gh/nickhartjes/ASD-ADPP-Algoritmes). 
+Als laatste stap word `gradle run` uitgevoerd. De applicatie word uitgevoerd, en alle voorbeelden in de main worden uitgevoerd.
+
+### Quicksort
+
+#### Generic programming
+[Code](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/sort/GenericQuickSort.java)
+
+[Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/sort/GenericQuickSortTest.java)
+
+~~~java
+var quickMergeCharacter = new GenericQuickSort<Character>();
+var quickMergeStudent = new GenericQuickSort<Student>();
+~~~
+
+[Bron: codefragment](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/Main.java)
+
+#### Pivotselectie
+
+Om op een goede en uitbreidbare manier een pivotselectie te implementeren heb ik zelf gekozen om een  strategy pattern toe te passen. Hierbij kunnen ook toekomstige manier voor pivots makkelijk worden toegevoegd.  
+De volgende 3 pivot's zijn geimplementeerd
+
+- Random
+- Middle 
+- Median Of Three
+
+[Code](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/tree/master/src/main/java/nl/nickhartjes/han/asd/adpp/sort/pivot)
+
+[Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/sort/GenericQuickSortTest.java)
+
+~~~java
+var quickMergeStudent = new GenericQuickSort<Student>();
+quickMergeStudent.sort(this.studentArray, new MiddlePivot<>());
+quickMergeStudent.sort(this.studentArray, new RandomPivot<>());
+quickMergeStudent.sort(this.studentArray, new MedianOfThreePivot<>());
+~~~
+
+[Bron: codefragment](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/Main.java)
+
+#### Geautomatiseerd testen op bekende input 
+[Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/sort/GenericQuickSortTest.java)
+Resultaat van testen in : [travis-ci.com](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes) en/of  [travis-ci.org](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes) 
+
+### Kortste paden  
+
+#### Datastructuren     
+sdfsdf
+
+#### Ongewogen      
+dfgd
+
+#### Gewogen      
+dsgfdf
+
+#### Geautomatiseerd testen op bekende input      
+sdfgdf
+
+#### Correctheid bij onbekende input    
+asdf
+
+### Binaire zoekboom  
+
+#### insert      
+dsfsd
+
+#### find   
+dsfsd
+
+#### findMin en findMax      
+dsfsd
+
+#### remove      
+dsfsd
+
+#### Geautomatiseerd testen op bekende input      
+dsfsd
+
+#### Correctheid bij onbekende input
+dsfsd
+| 50%                                                                                                                                                                                                           | 0%                                                                                                                         | Beoordeling (%) |
 |---------------------|--------|-----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|-----------------|
 | Reproduceerbaarheid | 1      | Online-compileerbaarheid                | 100         | * Ontwikkelt in een programmeertaal naar keuze uitsluitend een volledige, eigenstandige softwaremodule die d.m.v. een veilige webomgeving te compileren/interpreteren en draaien is. Bijv.: een werkend stuk broncode dat via GitLab.com en GitLab CI gebouwd en getest kan worden.                                                                                                                                                                                                                                                                                                                                                                | * Ontwikkelt deels.                                                                                                                                                                                           | * Ontwikkelt niet of nauwelijks.                                                                                           |                 |
 | Quicksort           | 1      | Generic programming                     | 0           | * Ontwikkelt implementatie generic, ten minste voor klassen die Comparable implementeren.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | * Ontwikkelt generic maar niet ten minste voor Comparable.                                                                                                                                                    | * Ontwikkelt niet generic of niets.                                                                                        |                 |
@@ -44,21 +133,4 @@ c.  (bonus) Implementeer de operatie remove(int x). Hint: bestudeer de implement
 
 
 
-| Aspect              | Criterium                               | Verwijzing |
-|---------------------|-----------------------------------------|------------|
-| Reproduceerbaarheid | Online-compileerbaarheid                |            |
-| Quicksort           | Generic programming                     |            |
-|                     | Pivotselectie                           |            |
-|                     | Geautomatiseerd testen op bekende input |            |
-|                     | Correctheid bij onbekende input         |            |
-| Kortste paden       | Datastructuren                          |            |
-|                     | Ongewogen                               |            |
-|                     | Gewogen                                 |            |
-|                     | Geautomatiseerd testen op bekende input |            |
-|                     | Correctheid bij onbekende input         |            |
-| Binaire zoekboom    | insert                                  |            |
-|                     | find                                    |            |
-|                     | findMin en findMax                      |            |
-|                     | remove                                  |            |
-|                     | Geautomatiseerd testen op bekende input |            |
-|                     | Correctheid bij onbekende input         |            |
+
