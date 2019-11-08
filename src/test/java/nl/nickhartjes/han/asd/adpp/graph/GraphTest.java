@@ -65,8 +65,8 @@ class GraphTest {
     void addEdge_AddEdgesToVerticesInUndirectedWeightedGraph_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3);
-        graph.addEdge(1, 2, 2.0);
-        graph.addEdge(1, 3, 2.0);
+        graph.addEdge(1, 2, 2);
+        graph.addEdge(1, 3, 2);
         assertEquals(2, graph.getAdjacencyList().get(1).getEdges().size());
         assertEquals(1, graph.getAdjacencyList().get(2).getEdges().size());
         assertEquals(1, graph.getAdjacencyList().get(3).getEdges().size());
@@ -76,8 +76,8 @@ class GraphTest {
     void addEdge_AddEdgesToVerticesInDirectedWeightedGraph_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3);
-        graph.addEdge(1, 2, 2.0);
-        graph.addEdge(1, 3, 2.0);
+        graph.addEdge(1, 2, 2);
+        graph.addEdge(1, 3, 2);
         assertEquals(2, graph.getAdjacencyList().get(1).getEdges().size());
         assertEquals(0, graph.getAdjacencyList().get(2).getEdges().size());
         assertEquals(0, graph.getAdjacencyList().get(3).getEdges().size());
@@ -87,7 +87,7 @@ class GraphTest {
     void addEdge_AddNegativeEdgeToVerticesInDirectedWeightedGraph_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3);
-        graph.addEdge(1, 2, -2.0);
+        graph.addEdge(1, 2, -2);
         assertEquals(1, graph.getAdjacencyList().get(1).getEdges().size());
         assertEquals(0, graph.getAdjacencyList().get(2).getEdges().size());
     }
@@ -96,7 +96,7 @@ class GraphTest {
     void addEdge_AddWeightToAndUnweightedEdge_ThrowException() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
         graph.addVertex(1, 2, 3);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> graph.addEdge(1, 2, 2.0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> graph.addEdge(1, 2, 2));
     }
 
     @Test
@@ -150,10 +150,10 @@ class GraphTest {
     void searchShortestPath_DirectedWeightedPath_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3, 4, 5, 6, 7);
-        graph.addEdge(1, 2, 20d);
-        graph.addEdge(1, 3, 2d);
-        graph.addEdge(3, 7, 10d);
-        graph.addEdge(1, 7, 30d);
+        graph.addEdge(1, 2, 20);
+        graph.addEdge(1, 3, 2);
+        graph.addEdge(3, 7, 10);
+        graph.addEdge(1, 7, 30);
         GraphPath<Integer> graphPath = graph.searchShortestPath(1, 7);
         // 1 --> 7
         logger.info("{}", graph);
@@ -166,9 +166,9 @@ class GraphTest {
     void searchShortestPath_UnDirectedWeightedPath_Successful() {
         Graph<Integer> graph = new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
         graph.addVertex(1, 2, 3);
-        graph.addEdge(1, 2, 1d);
-        graph.addEdge(1, 3, 8d);
-        graph.addEdge(2, 3, 2d);
+        graph.addEdge(1, 2, 1);
+        graph.addEdge(1, 3, 8);
+        graph.addEdge(2, 3, 2);
 
 
         GraphPath<Integer> graphPath = graph.searchShortestPath(1, 3);

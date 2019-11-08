@@ -7,7 +7,7 @@ import java.util.List;
 public class GraphPath<T> {
 
     private LinkedList<GraphVertex<T>> path;
-    private double weight;
+    private int weight;
 
     public GraphPath() {
         this.path = new LinkedList<>();
@@ -17,11 +17,11 @@ public class GraphPath<T> {
         return path;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 

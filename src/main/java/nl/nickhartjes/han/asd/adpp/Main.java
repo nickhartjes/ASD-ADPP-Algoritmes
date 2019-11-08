@@ -140,24 +140,24 @@ class Main {
 
         Graph<Character> route03 = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
         route03.addVertex(this.graphCharacterArray);
-        route03.addEdge('a', 'b', 8.1);
-        route03.addEdge('c', 'b', 3.4);
-        route03.addEdge('a', 'c', 6.1);
-        route03.addEdge('c', 'd', 4.5);
-        route03.addEdge('d', 'e', 7.4);
-        route03.addEdge('e', 'a', 2.2);
+        route03.addEdge('a', 'b', 8);
+        route03.addEdge('c', 'b', 3);
+        route03.addEdge('a', 'c', 6);
+        route03.addEdge('c', 'd', 4);
+        route03.addEdge('d', 'e', 7);
+        route03.addEdge('e', 'a', 2);
         logger.info("Graph 03: {}", route03);
         logger.info("Graph 03: shortestpath {}", route03.searchShortestPath('a', 'e'));
 
         Graph<Character> route04 =
                 new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
         route04.addVertex(this.graphCharacterArray);
-        route04.addEdge('a', 'b', 8.1);
-        route04.addEdge('c', 'b', 3.4);
-        route04.addEdge('a', 'c', 6.1);
-        route04.addEdge('c', 'd', 4.5);
-        route04.addEdge('d', 'e', 7.4);
-        route04.addEdge('e', 'a', 2.2);
+        route04.addEdge('a', 'b', 8);
+        route04.addEdge('c', 'b', 3);
+        route04.addEdge('a', 'c', 6);
+        route04.addEdge('c', 'd', 4);
+        route04.addEdge('d', 'e', 7);
+        route04.addEdge('e', 'a', 2);
         logger.info("Graph 04: shortestpath {}", route04.searchShortestPath('a', 'e'));
 
         Graph<Character> route05 =

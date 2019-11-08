@@ -34,10 +34,10 @@ public class Graph<T> {
     public void addEdge(T sourceVertex, T destinationVertex) {
         if (weighted == GraphWeight.WEIGHTED)
             throw new IllegalArgumentException("You need to add weight to the Edge");
-        this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, 1d);
+        this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, 1);
     }
 
-    public void addEdge(T sourceVertex, T destinationVertex, Double weight) {
+    public void addEdge(T sourceVertex, T destinationVertex, int weight) {
         if (this.weighted == GraphWeight.UNWEIGHTED)
             throw new IllegalArgumentException("You can't add weight to an unweigthed graph");
         this.addEdgeToAdjecencylist(sourceVertex, destinationVertex, weight);
@@ -51,7 +51,7 @@ public class Graph<T> {
         return weighted;
     }
 
-    private void addEdgeToAdjecencylist(T sourceVertex, T destinationVertex, Double weight) {
+    private void addEdgeToAdjecencylist(T sourceVertex, T destinationVertex, int weight) {
         if (!this.adjacencyList.containsKey(sourceVertex))
             throw new IllegalArgumentException("The source vertex doesnt exist in this graph");
 

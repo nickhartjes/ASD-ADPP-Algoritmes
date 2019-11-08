@@ -24,13 +24,13 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
         this.adjacencyList = graph.getAdjacencyList();
 
         // Set the the distance as high as possible.
-        double shortestDistance = Double.POSITIVE_INFINITY;
+        int shortestDistance = Integer.MAX_VALUE;
 
         // Set the first value in the distance table
         GraphVertex<T> sourceGraphVertex = this.adjacencyList.get(sourceVertex);
-        double startWeight = 0d;
+        int startWeight = 0;
         if(graph.getWeighted() == GraphWeight.UNWEIGHTED)
-            startWeight = startWeight + 1d;
+            startWeight = startWeight + 1;
 
         this.distanceMap.put(sourceGraphVertex, new DistanceMapEntry<T>(sourceGraphVertex, sourceGraphVertex, startWeight));
 
@@ -51,7 +51,7 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
             this.addToQueue(process.getValue(), lowestElementFromQueue.getWeight(), shortestDistance);
         }
 
-        if (shortestDistance == Double.POSITIVE_INFINITY)
+        if (shortestDistance == Integer.MAX_VALUE)
             throw new IllegalStateException("No route exists");
 
         return this.traceBackShortestRoute(this.distanceMap, this.adjacencyList.get(sourceVertex), this.adjacencyList.get(destinationVertex));
@@ -73,11 +73,11 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
     }
 
 
-    private void addToQueue(T sourceVertex, Double weight, Double shortestDistance) {
+    private void addToQueue(T sourceVertex, int weight, int shortestDistance) {
         GraphVertex<T> sourceGraphVertex = adjacencyList.get(sourceVertex);
 
         for (GraphEdge<T> edge : sourceGraphVertex.getEdges()) {
-            double newWeight = weight + edge.getWeight();
+            int newWeight = weight + edge.getWeight();
 
             if (newWeight < shortestDistance) {
 
@@ -96,9 +96,9 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
     private class PriorityQueueElement implements Comparable {
 
         private GraphVertex<T> vertex;
-        private double weight;
+        private int weight;
 
-        PriorityQueueElement(GraphVertex<T> vertex, double weight) {
+        PriorityQueueElement(GraphVertex<T> vertex, int weight) {
             this.vertex = vertex;
             this.weight = weight;
         }
@@ -107,7 +107,7 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
             return vertex;
         }
 
-        double getWeight() {
+        int getWeight() {
             return weight;
         }
 
@@ -137,9 +137,9 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
 
         private GraphVertex<T> vertex;
         private GraphVertex<T> parentVertex;
-        private double weight;
+        private int weight;
 
-        public DistanceMapEntry(GraphVertex<T> vertex, GraphVertex<T> parentVertex, double weight) {
+        public DistanceMapEntry(GraphVertex<T> vertex, GraphVertex<T> parentVertex, int weight) {
             this.vertex = vertex;
             this.parentVertex = parentVertex;
             this.weight = weight;
@@ -161,11 +161,11 @@ public class DijkstraStrategy<T> implements SearchStrategy<T> {
             this.parentVertex = parentVertex;
         }
 
-        public double getWeight() {
+        public int getWeight() {
             return weight;
         }
 
-        public void setWeight(double weight) {
+        public void setWeight(int weight) {
             this.weight = weight;
         }
 

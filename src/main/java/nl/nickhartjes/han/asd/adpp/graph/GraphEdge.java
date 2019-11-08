@@ -4,9 +4,9 @@ public class GraphEdge<T> implements Comparable<GraphEdge> {
 
     private GraphVertex<T> source;
     private GraphVertex<T> destination;
-    private double weight;
+    private int weight;
 
-    public GraphEdge(GraphVertex<T> source, GraphVertex<T> destination, double weight) {
+    public GraphEdge(GraphVertex<T> source, GraphVertex<T> destination, int weight) {
         this.source = source;
         this.destination = destination;
         this.weight = weight;
@@ -20,7 +20,7 @@ public class GraphEdge<T> implements Comparable<GraphEdge> {
         return destination;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
