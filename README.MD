@@ -1,6 +1,5 @@
 ![HAN](https://upload.wikimedia.org/wikipedia/commons/e/eb/HAN-merkteken-descriptor.png)
 
-##### Travis ci   
 
 [![Build Status](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes.svg?branch=master)](https://travis-ci.org/nickhartjes/ASD-ADPP-Algoritmes)
 [![codecov](https://codecov.io/gh/nickhartjes/ASD-ADPP-Algoritmes/branch/master/graph/badge.svg?token=K06sZUhOmk)](https://codecov.io/gh/nickhartjes/ASD-ADPP-Algoritmes)
@@ -8,7 +7,11 @@
 # Opdrachten PO_Algoritmes
 
 
+[TOC]
+
+
 ## Opdracht 1      
+
 Programmeer Quicksort uit zoals in de opgave van Sorteeralgoritmes, maar deze keer generic voor klassen die de Comparable<T> interface implementeren
 
 ## Opdracht 2   
@@ -79,7 +82,24 @@ Resultaat van testen in : [travis-ci.com](https://travis-ci.org/nickhartjes/ASD-
 ### Kortste paden  
 
 #### Datastructuren     
-Voor het maken van de graaf heb ik ook gekozen om generics te gebruiken. Zodat er de mogelijk bestaat om ook grafen te maken van andere objecten. Dat had alleen als impact dat ik geen 2d linkedlist kon gebruiken als adjacency list. De reden hiervoor is dat ik de waarde van de vertex niet kon gebruiken als key. Dit gaat met een primitieve of niet-primitieve integer wel. Uiteindelijk heb ik er voor gekozen om een hashmap te implementeren. Dit geeft de mogelijkheid dat je met een object de juiste vertex kan oproepen, waarin dat een linkedlist staat met edges naar andere vertices.
+Voor het maken van de graaf heb ik ook gekozen om generics te gebruiken. Zodat er de mogelijk bestaat om ook grafen te maken van andere objecten. Dat had als impact dat ik geen 2d linkedlist kon gebruiken als adjacency list. De reden hiervoor is dat ik de waarde van de vertex niet kon gebruiken als key. Dit gaat met een primitieve of niet-primitieve integer wel. Uiteindelijk heb ik er voor gekozen om een hashmap te implementeren. Dit geeft de mogelijkheid dat je met een object de juiste vertex kan oproepen, waarin dat een linkedlist staat met edges naar andere vertices.
+
+Een adjacency list heeft standaard de voorkeur ten opzichte van een adjecency matrix. Dit omdat het efficiënter omgaat met graaf met een lage dichtheid. Is de dichtheid hoger ( wanneer de aantal edges dicht aan het aantal vertices tot de macht 2 ligt) dan is de matrix weer efficiënter.
+
+|                                                              | Adjacency list                                               | Adjacency matrix                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Store graph                                                  | O(\|V\|+\|E\|)                                               | O(\|V\|^2)                                                   |
+| Add vertex                                                   | O(1)                                                         | O(\|V\|^2)                                                   |
+| Add edge                                                     | O(1)                                                         | O(1)                                                         |
+| Remove vertex                                                | O(\|E\|)                                                     | O(\|V\|^2)                                                   |
+| Remove edge                                                  | O(\|V\|)                                                     | O(1)                                                         |
+| Are vertices x and y adjacent (assuming that their storage positions are known)? | O(\|V\|)                                                     | O(1)                                                         |
+| Remarks                                                      | Slow to remove vertices and edges, because it needs to find all vertices or edges | Slow to add or remove vertices, because matrix must be resized/copied |
+
+|V| = Vertices
+|E| = Edges
+[Bron](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)) 
+
 
 Een strategy pattern is gebruikt om het Dijkstra algoritme te implementeren. Hierdoor kunnen er makkelijker verschillende shortest path algoritmes toegevoegd worden.
 
@@ -137,12 +157,12 @@ logger.info("Graph 05: shortestpath {}", route05.searchShortestPath('a', 'e'));
 Graph<Character> route04 =
     new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
 route04.addVertex(this.graphCharacterArray);
-route04.addEdge('a', 'b', 8.1);
-route04.addEdge('c', 'b', 3.4);
-route04.addEdge('a', 'c', 6.1);
-route04.addEdge('c', 'd', 4.5);
-route04.addEdge('d', 'e', 7.4);
-route04.addEdge('e', 'a', 2.2);
+route04.addEdge('a', 'b', 8);
+route04.addEdge('c', 'b', 3);
+route04.addEdge('a', 'c', 6);
+route04.addEdge('c', 'd', 4);
+route04.addEdge('d', 'e', 7);
+route04.addEdge('e', 'a', 2);
 logger.info("Graph 04: shortestpath {}", route04.searchShortestPath('a', 'e'));
 // Graph 04: shortestpath Path{path=a --> e --> , weight=2.2}
 
