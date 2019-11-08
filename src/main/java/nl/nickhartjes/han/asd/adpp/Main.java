@@ -63,6 +63,62 @@ class Main {
         this.studentArray = new Student[]{marc, joey, nick};
     }
 
+    private void testSort() {
+
+        logger.info("--- Start Sort ---");
+        this.initializeData();
+        var runInsertion = new InsertionSort();
+        logger.info("--- Start Insertions sort ---");
+        logger.info("Before: {}", this.intArray);
+        logger.info("After: {}", runInsertion.sort(this.intArray));
+        logger.info("--- End Insertions sort ---");
+
+        this.initializeData();
+        var runMerge = new MergeSort();
+        logger.info("--- Start merge sort ---");
+        logger.info("Before: {}", this.intArray);
+        logger.info("After: {}", runMerge.sort(this.intArray));
+        logger.info("--- End merge sort ---");
+
+        this.initializeData();
+        var quickSort = new QuickSort();
+        logger.info("--- Start quick sort ---");
+        logger.info("Before: {}", this.intArray);
+        logger.info("After: {}", quickSort.sort(this.intArray));
+        this.initializeData();
+        logger.info("Before: {}", this.intArray);
+        logger.info("After: {}", quickSort.sort(this.intArray, true));
+        logger.info("--- End quick sort ---");
+
+//        this.initializeData();
+//        var quickMergeCharacter = new GenericQuickSort<Character>();
+//        Util.printArray(quickMergeCharacter.sort(this.characterArray, new RandomPivot<>()));
+//        Util.printArray(quickMergeCharacter.sort(this.characterArray, new MedianOfThreePivot<>()));
+
+        this.initializeData();
+        var quickSortCharacter = new GenericQuickSort<Character>();
+        logger.info("--- Start generic quick sort ---");
+        logger.info("Before: {}", Util.printArray(this.characterArray));
+        logger.info("After MiddlePivot : {}", Util.printArray(quickSortCharacter.sort(this.characterArray, new MiddlePivot<>())));
+        this.initializeData();
+        logger.info("After RandomPivot: {}", Util.printArray(quickSortCharacter.sort(this.characterArray, new RandomPivot<>())));
+        this.initializeData();
+        logger.info("After MOTPivot: {}", Util.printArray(quickSortCharacter.sort(this.characterArray, new MedianOfThreePivot<>())));
+        logger.info("--- End merge sort ---");
+
+        var quickSortStudents = new GenericQuickSort<Student>();
+        logger.info("--- Start generic quick sort ---");
+        logger.info("Before: {}", Util.printArray(this.studentArray));
+        logger.info("After MiddlePivot : {}", Util.printArray(quickSortStudents.sort(this.studentArray, new MiddlePivot<>())));
+        this.initializeData();
+        logger.info("After RandomPivot: {}", Util.printArray(quickSortStudents.sort(this.studentArray, new RandomPivot<>())));
+        this.initializeData();
+        logger.info("After MOTPivot: {}", Util.printArray(quickSortStudents.sort(this.studentArray, new MedianOfThreePivot<>())));
+        logger.info("--- End merge sort ---");
+
+        logger.info("--- End Sort ---");
+    }
+
     private void testGraph() {
         this.initializeData();
 
@@ -118,32 +174,6 @@ class Main {
         logger.info("--- End Graph ---");
     }
 
-    private void testSort() {
-        this.initializeData();
-
-        logger.info("--- Start Sort ---");
-        var runInsertion = new InsertionSort();
-        Util.printArray(runInsertion.sort(this.intArray));
-
-        var runMerge = new MergeSort();
-        Util.printArray(runMerge.sort(this.intArray));
-
-        var quickMerge = new QuickSort();
-        Util.printArray(quickMerge.sort(this.intArray));
-        Util.printArray(quickMerge.sort(this.intArray, true));
-
-        var quickMergeCharacter = new GenericQuickSort<Character>();
-        Util.printArray(quickMergeCharacter.sort(this.characterArray, new MiddlePivot<>()));
-        Util.printArray(quickMergeCharacter.sort(this.characterArray, new RandomPivot<>()));
-        Util.printArray(quickMergeCharacter.sort(this.characterArray, new MedianOfThreePivot<>()));
-
-        var quickMergeStudent = new GenericQuickSort<Student>();
-        Util.printArray(quickMergeStudent.sort(this.studentArray, new MiddlePivot<>()));
-        Util.printArray(quickMergeStudent.sort(this.studentArray, new RandomPivot<>()));
-        Util.printArray(quickMergeStudent.sort(this.studentArray, new MedianOfThreePivot<>()));
-        logger.info("--- End Sort ---");
-    }
-
     private void testBinaryTree() {
         this.initializeData();
 
@@ -155,6 +185,7 @@ class Main {
         binarySearchTree01.insert(8);
         binarySearchTree01.insert(2);
         binarySearchTree01.insert(1);
+        // or
         binarySearchTree01.insert(3, 2, 4, 2, 77, 3, 213423, 34, 223, 443, -33);
 
         logger.info("Tree {}", binarySearchTree01.displayTree());
@@ -163,7 +194,15 @@ class Main {
         Integer node1 = binarySearchTree01.findMax();
         logger.info("FindMax {}", node1);
         Integer node2 = binarySearchTree01.findMin();
-        logger.info("FindMin{}", node2);
+        logger.info("FindMin {}", node2);
+
+        logger.info("Tree before remove 213423: {}", binarySearchTree01.displayTree());
+        binarySearchTree01.remove(213423);
+        logger.info("Tree after remove 213423: {}", binarySearchTree01.displayTree());
+
+        logger.info("Tree before remove 10: {}", binarySearchTree01.displayTree());
+        binarySearchTree01.remove(10);
+        logger.info("Tree after remove 10: {}", binarySearchTree01.displayTree());
         logger.info("--- End BinaryTree ---");
     }
 }
