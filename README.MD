@@ -79,24 +79,76 @@ Resultaat van testen in : [travis-ci.com](https://travis-ci.org/nickhartjes/ASD-
 ### Kortste paden  
 
 #### Datastructuren     
+Voor het maken van de graaf heb ik ook gekozen om generics te gebruiken. Zodat er de mogelijk bestaat om ook grafen te maken van andere objecten. Dat had alleen als impact dat ik geen 2d linkedlist kon gebruiken als adjacency list. De reden hiervoor is dat ik de waarde van de vertex niet kon gebruiken als key. Dit gaat met een primitieve of niet-primitieve integer wel. Uiteindelijk heb ik er voor gekozen om een hashmap te implementeren. Dit geeft de mogelijkheid dat je met een object de juiste vertex kan oproepen, waarin dat een linkedlist staat met edges naar andere vertices.
+
+Een strategy pattern is gebruikt om het Dijkstra algoritme te implementeren. Hierdoor kunnen er makkelijker verschillende shortest path algoritmes toegevoegd worden.
+
+De graaf is zowel directed als undirected te gebruiken, en weighted en unweighted.
+Dit is te doen om in de constructor de GraphDirection en GraphWeight mee te geven.
+
+~~~java
+Graph<Character> route01 = new Graph<>(GraphDirection.DIRECTED, GraphWeight.WEIGHTED);
+~~~
+
+Bij default is de graaf unweighted en undirected.
+
 [Code](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/graph/Graph.java)
 
 [Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/graph/GraphTest.java)
 
 ~~~java
-var quickMergeStudent = new GenericQuickSort<Student>();
-quickMergeStudent.sort(this.studentArray, new MiddlePivot<>());
-quickMergeStudent.sort(this.studentArray, new RandomPivot<>());
-quickMergeStudent.sort(this.studentArray, new MedianOfThreePivot<>());
+Graph<Character> route01 = new Graph<>();
+route01.addVertex(this.graphCharacterArray);
+route01.addEdge('a', 'b');
+route01.addEdge('c', 'b');
+route01.addEdge('a', 'c');
 ~~~
 
 [Bron: codefragment](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/Main.java)
 
 #### Ongewogen      
-dfgd
+[Code](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/graph/Graph.java)
+
+[Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/graph/GraphTest.java)
+
+~~~java
+Graph<Character> route05 =
+    new Graph<>(GraphDirection.DIRECTED, GraphWeight.UNWEIGHTED);
+route05.addVertex(this.graphCharacterArray);
+route05.addEdge('a', 'b');
+route05.addEdge('c', 'b');
+route05.addEdge('a', 'c');
+route05.addEdge('c', 'd');
+route05.addEdge('d', 'e');
+route05.addEdge('e', 'a');
+logger.info("Graph 05: shortestpath {}", route05.searchShortestPath('a', 'e'));
+// Graph 05: shortestpath Path{path=a --> c --> d --> e --> , weight=4.0}
+
+~~~
+
+[Bron: codefragment](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/Main.java)
 
 #### Gewogen      
-dsgfdf
+[Code](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/graph/Graph.java)
+
+[Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/graph/GraphTest.java)
+
+~~~java
+Graph<Character> route04 =
+    new Graph<>(GraphDirection.UNDIRECTED, GraphWeight.WEIGHTED);
+route04.addVertex(this.graphCharacterArray);
+route04.addEdge('a', 'b', 8.1);
+route04.addEdge('c', 'b', 3.4);
+route04.addEdge('a', 'c', 6.1);
+route04.addEdge('c', 'd', 4.5);
+route04.addEdge('d', 'e', 7.4);
+route04.addEdge('e', 'a', 2.2);
+logger.info("Graph 04: shortestpath {}", route04.searchShortestPath('a', 'e'));
+// Graph 04: shortestpath Path{path=a --> e --> , weight=2.2}
+
+~~~
+
+[Bron: codefragment](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/main/java/nl/nickhartjes/han/asd/adpp/Main.java)
 
 #### Geautomatiseerd testen op bekende input      
 [Testen](https://github.com/nickhartjes/ASD-ADPP-Algoritmes/blob/master/src/test/java/nl/nickhartjes/han/asd/adpp/graph/GraphTest.java)

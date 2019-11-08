@@ -62,7 +62,7 @@ public class Graph<T> {
             throw new IllegalArgumentException("A Vertex can't connect to itself");
 
         GraphVertex<T> sourceGraphVertex = this.adjacencyList.get(sourceVertex);
-        GraphVertex<T>  destinationGraphVertex = this.adjacencyList.get(destinationVertex);
+        GraphVertex<T> destinationGraphVertex = this.adjacencyList.get(destinationVertex);
         GraphEdge<T> edge = new GraphEdge<>(sourceGraphVertex, destinationGraphVertex, weight);
         sourceGraphVertex.setEdge(edge);
 
